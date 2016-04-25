@@ -1,0 +1,25 @@
+ # Algorithmen und Datenstrukturen
+
+## Algorithmus Bresenham1
+
+Zeichnet Kreis mit Radius R.
+
+## Multiplikation langer Zahlen
+
+__Grundoperationen:__ Operationen, die man in einem einzigen Schritt bzw. in
+einer konstanten Zeiteinheit ausfuehren kann.
+
+_Literatur: Taschenbuch der Algorithmen_
+
+## Effizienzmessung
+
+T: I -> N   -   Laufzeit des Algorithmus
+
+Da es von der Eingabe abhaengt, wie schnell das Algortithmus funktioniert, gibt
+es verschiedene Faelle:
+
++ worst case
++ average case
++ best case
+
+

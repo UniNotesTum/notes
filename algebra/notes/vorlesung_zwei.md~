@@ -1,0 +1,94 @@
+## Abbildungen
+
+Definition
+
+Alle bijektiven Abbildungen sind invertierbar.
+
+Beweis der Eindeutigkeit des Satzes: zu zeigen sind Existenz und Eindeutigkeit
+einer solchen Abbildung. (f und f^-1)
+
+f ist bijektiv, also insbesondere surjektiv. Danach wenden wir die
+injektivitaet an, um zu zeigen, dass jedem y aus Y genau ein x aus X zugeordnet
+ist. So haben wir die Existenz bewiesen.
+
+Und jetzt die Eindeutigkeit. Im Allgemeinen nehmen wir an, dass f1 und f2 mit
+einer Eigenschaft gleich sind oder umgekehrt wir f1 und f2 nicht gleich sind und
+wir kommen zu einem Widespruch.
+
+f bijektiv => fuer alle y aus Y gibt es exakt einen x aus X mit f(x) = y.
+
+Jede zu f inverse Abildung muss y auf x abbilden.
+
+* Siehe Seite 11
+
+## Grosse der Mengen
+
+Zwei Mengen X und Y sind gleichmaechtig, wenn es eine bijektive Abbildung von X
+nach Y gibt.
+
+Seien X, Y endliche Mengen. Dann gilt X und Y sind gleichmaechtig genau dann,
+wenn sie gleich viele Elemente besitzen.
+
+Frage: Besitzen die unendlichen Mengen gleich viele Elemente?
+
+Um zu beweisen, dass sie gleichmaechtig sind, muessen wir eine bijektive
+Abbildung von einer Menge in die andere finden.
+
+__Gleichmaechtig von N und Z__.
+
+f(2n) := n, f(2n-1) := -n.
+
+Jede ganze Zahl kommt als Bild vor, also surjektiv. Eine natuerliche Zahl n hat
+2n und eine  negative Zahl -n hat 2n-1 als Urbild -> injektiv -> bijektiv.
+
+__N und Q sind auch gleichmaechtig__ Der Beweis nach Cantor.
+
+__Proposition:__ Jede unendliche Menge hat eine echte Teilmenge der selben
+Maechtigkeit.
+
+__Korollar:__ Die Mengen Z und qZ fuer alle q aus N sind gleichmaechtig. Die
+Mengen Q und Z sind gleichmaechtig. (kommt aus dem Beweis, nicht der Aussage)
+
+Nicht jede Teilmenge einer unendlichen Menge hat dieselbe Maechtigkeit.
+
+__Satz:__ Die Potenzmenge P(X) hat eine groessere Maechtigkeit als X.
+
+__Beweis:__ Es reicht zu zeigen, dass P(X) und X nicht gleichmaechtig sind, da
+alle einelementigen {x} fuer alle x aus X Elemente von P(X) sind. Wir beweisen das
+durch einen Widerspruch. Angenommen es gaebe eine bijektive Abbildung f von X auf
+P(X).
+
+x aus X: Bild f(x) ist Teilmenge von X. Wir unterscheiden zwei
+Faelle("Trick"). Fuer manche x aus X gibt x aus f(X), fuer die anderen gibt es
+nicht.
+
+//TODO
+
+__Satz:__ Maechtigigkeit der Potenzmnge. Eine endliche Menge mit n Elementen hat
+2^n Elementen.
+
+__Beweis:__ Durch Induktion nach n. Fuer n=1 gilt das. //TODO
+
+
+## Koerper
+
+Ein Koerper ist eine Menge K mit zwei Abbildungen + und *, die ordnen (x,y) aus
+K^2 ein x+y aus K bzw. x*y zu. Zudem muessen die Abbildungen 3 Arten von
+Gesetzen fuer alle x,y,z aus K erfuellen.
+
+* Gesetze der Addition
+  + Assoziativitaet
+  + Existenz der Eindeutigkeit des neutralen Elements
+  + Existenz und Eindeutigkeit inverser Elemente
+  + Kommutativitaet
+* Gesetze der Multiplikation
+  + Die gleichen + x=0 wird rausgenommen
+* Distributivgesetz
+
+Entscheidend ist auch, dass die beiden Abbildungen __abgeschlossen__ sind.
+
+__Beispiele:__
+
+* reelle Zahlen
+* rationale Zahlen
+* $Z_n$

@@ -1,0 +1,17 @@
+media.net.in.tum.de - alte Vorlesungsaufzeichnungen
+
+## Geschiechte
+
+## Beschreibung
+
+Jede Schicht fuegt einen Header hinzu und deshalb wir die Nachricht am Ende
+laenger.
+
+In der Realitaet tauchen nicht alle Schiechten immer auf.
+
+
+## Physikalische Schicht
+
+### Signaldarstellung
+
+## Erste Programmieraufgabe

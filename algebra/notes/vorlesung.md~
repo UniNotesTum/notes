@@ -1,0 +1,166 @@
+## Abbildungen
+
+Definition
+
+Alle bijektiven Abbildungen sind invertierbar.
+
+Beweis der Eindeutigkeit des Satzes: zu zeigen sind Existenz und Eindeutigkeit
+einer solchen Abbildung. (f und f^-1)
+
+f ist bijektiv, also insbesondere surjektiv. Danach wenden wir die
+injektivitaet an, um zu zeigen, dass jedem y aus Y genau ein x aus X zugeordnet
+ist. So haben wir die Existenz bewiesen.
+
+Und jetzt die Eindeutigkeit. Im Allgemeinen nehmen wir an, dass f1 und f2 mit
+einer Eigenschaft gleich sind oder umgekehrt wir f1 und f2 nicht gleich sind und
+wir kommen zu einem Widespruch.
+
+f bijektiv => fuer alle y aus Y gibt es exakt einen x aus X mit f(x) = y.
+
+Jede zu f inverse Abildung muss y auf x abbilden.
+
+* Siehe Seite 11
+
+## Grosse der Mengen
+
+Zwei Mengen X und Y sind gleichmaechtig, wenn es eine bijektive Abbildung von X
+nach Y gibt.
+
+Seien X, Y endliche Mengen. Dann gilt X und Y sind gleichmaechtig genau dann,
+wenn sie gleich viele Elemente besitzen.
+
+Frage: Besitzen die unendlichen Mengen gleich viele Elemente?
+
+Um zu beweisen, dass sie gleichmaechtig sind, muessen wir eine bijektive
+Abbildung von einer Menge in die andere finden.
+
+__Gleichmaechtig von N und Z__.
+
+f(2n) := n, f(2n-1) := -n.
+
+Jede ganze Zahl kommt als Bild vor, also surjektiv. Eine natuerliche Zahl n hat
+2n und eine  negative Zahl -n hat 2n-1 als Urbild -> injektiv -> bijektiv.
+
+__N und Q sind auch gleichmaechtig__ Der Beweis nach Cantor.
+
+__Proposition:__ Jede unendliche Menge hat eine echte Teilmenge der selben
+Maechtigkeit.
+
+__Korollar:__ Die Mengen Z und qZ fuer alle q aus N sind gleichmaechtig. Die
+Mengen Q und Z sind gleichmaechtig. (kommt aus dem Beweis, nicht der Aussage)
+
+Nicht jede Teilmenge einer unendlichen Menge hat dieselbe Maechtigkeit.
+
+__Satz:__ Die Potenzmenge P(X) hat eine groessere Maechtigkeit als X.
+
+__Beweis:__ Es reicht zu zeigen, dass P(X) und X nicht gleichmaechtig sind, da
+alle einelementigen {x} fuer alle x aus X Elemente von P(X) sind. Wir beweisen das
+durch einen Widerspruch. Angenommen es gaebe eine bijektive Abbildung f von X auf
+P(X).
+
+x aus X: Bild f(x) ist Teilmenge von X. Wir unterscheiden zwei
+Faelle("Trick"). Fuer manche x aus X gibt x aus f(X), fuer die anderen gibt es
+nicht.
+
+//TODO
+
+__Satz:__ Maechtigigkeit der Potenzmnge. Eine endliche Menge mit n Elementen hat
+2^n Elementen.
+
+__Beweis:__ Durch Induktion nach n. Fuer n=1 gilt das. //TODO
+
+
+## Koerper
+
+Ein Koerper ist eine Menge K mit zwei Abbildungen + und *, die ordnen (x,y) aus
+K^2 ein x+y aus K bzw. x*y zu. Zudem muessen die Abbildungen 3 Arten von
+Gesetzen fuer alle x,y,z aus K erfuellen.
+
+* Gesetze der Addition
+  + Assoziativitaet
+  + Existenz der Eindeutigkeit des neutralen Elements
+  + Existenz und Eindeutigkeit inverser Elemente
+  + Kommutativitaet
+* Gesetze der Multiplikation
+  + Die gleichen + x=0 wird rausgenommen
+* Distributivgesetz
+
+Entscheidend ist auch, dass die beiden Abbildungen __abgeschlossen__ sind.
+
+__Beispiele:__
+
+* reelle Zahlen
+* rationale Zahlen
+* $Z_n{1..n-1}$
+
+__Definition:__ Division mit Rest. Sei a eine ganze Zahl und b eine natuerliche
+Zahl mit b>=1. Dann gibt es eindeutig bestimmte ganze Zahlen q unr r mit
+folgenden Eigenschaften: a = q*b + r und 0<=r<b.
+
+## Matrizen
+
+### Definitionen
+
+__Satz__
+
+K sei in Folgenden immer ei Koerper
+
+Seien m,n aus N eine m x n - Matrix A ist eine Abbildung {1,..,m}x{1,..,n} -> K,
+wobei das Bild von (i,j) mit $a_(i,j)$ bezeichnet wird.
+
+__Satz:__ Die Menge aller m x n - Matrizen wird mit $K^(mxn)$ bezeichnet.
+
+Das Arbeiten mit Spaltenvektoren ist Standard, daher benutzen wir $K^m=K^(mx1)$
+fuer den m-dimensionalen Standardraum und nennen Spaltenvektoren auch einfach
+mit Vektoren.
+
+Definition von __i-ten Zeile__ und __j-ten Spalte__.
+
+Wenn wir genauso viele Zeilen wie Spalten hat, dann nennt man diese Matrix
+quadratisch.
+
+__Transponieren__ einer Matrix heist Spalten und Zeilen umdrehen.
+
+__Symmetrische Matrix__ ist eine quadratische Matrix, die nach dem Transponieren
+gleich bleibt.
+
+__Beispiele__
+
+* R^2 = {(x y) | x, y aus R} laesst sich als die Ausschauungsebene
+  interpretieren
+* Sind Si,..,Sn Staedte und di,j die Entfernung zwischen Si und Sj, dann ist
+  D=(d_ij) aus R^nxn die Distanzmatrix. In den meisten Anwendungen ist das sogar
+  ein Beispiel fuer symmetrische Matrizen.
+* Gegeben sei ein G=(V,E). Adjazenzmatrizen.
+
+__Definition:__ Die Summe ist nur fuer Matrizen definiert, die die gleichen
+Dimensionen haben. Die Eigenschaften der Addition von Matrizen: Assoziativitaet,
+Kommutativitaet.
+
+Es gibt eine Nullmatrix.
+
+__Produkt von Matrizen__
+
+__Permutationsmatrizen__ Sie sind aus einsen bestehend, und koennen die Position
+von Dimensionen in einem Vektor aendern.
+
+Das Produkt ist nur definiert, wenn die SpaltenZahl von A mit der Zeilenzahl von
+B uebereinstimmt.
+
+Matrizen werden typischerweise grossgeschrieben, Vektoren klein.
+
+Produkt einer Matrix mit einer Skalar - Element aus Koerper. Die Dimensionen
+bleiben gleich und jedes Element der Matrix wird mit dieser Skalar
+multipliziert.
+
+Beispiel: Wir haben einen Graphen mit einer Adjazenzmatrix. Wenn wir diese
+Matrix einmal mit sich selbst multiplizieren, dann bekommen wir in der
+resultierenden Matrix die Anzahl der Pfade der laenge exakt zwei vom Knoten i zu
+Knoten j.
+
+__Satz__
+
+1. (K^mxn, +) ist eine abelsche Gruppe
+2. Fuer A,B aus K^mxn und s,s' aus K gelten:
+   s(A+B) = sA + sB<br>
+   (s+s')A = SA + s'A
