@@ -1,0 +1,111 @@
+## Risc - V
+
+There are both 32-bit and 64-bit space variants for applications, operating
+system kernels and hardware implementation. It provides optional variable-length
+instructions to both expand available instrction encoding space and to support
+an optional dense instruction encoding for improved perfomance, static code
+size, and energy efficiency.
+
+There are two base integer variant, RV32I and RV64I, which correspond to the
+width of the integer registers and the corresponding size of the user address
+space.
+
+The base integer ISA is named "I" and contains integer computational
+instructions, integer loads, integer stores, and control-flow instructions, and
+is mandatory for all RISC-V implementations.
+
+The standard integer multiplication and division extension is named "M".
+
+The standard atomic instruction extension  "A" adds instructions that atomically
+read, modify, and write memory for inter-processor synchronization.
+
+The standard single-precision floating-point extension "F".
+
+Double-precision "D".
+
+The abbreviation "IMAFD" is given the abbreviation "G" and provides a
+general-purpose scalar instruction set.
+
+### Instruction Length Encoding
+
+The base ISA has a fixed-length 32 bit encoding. Commands are aligned on 32 bit
+boundaries. But extension may use any number of 16-bit instruction parcels.
+
+Little-endian the same as by x86. INstructions are always stored in a
+little-endian sequence of parcels regardless of the memory system endianness/
+
+It's very important the the lower parcel gets stored first because the lowest
+bits tell us how long the instruction will actually be and this lets us get the
+information only by fetching the first parcel.
+
+### Exceptions, Traps, Interrupts
+
+Exception - an unsual condition occurring at run time.
+
+Trap - synchronous transfer of control to a supervisor encironment when cause by
+an exceptional condition occurring within a RISC-V thread.
+
+Interrupt - blablabla caused by an event outside of the current RISC-V thread.
+
+### Base integer instruction set
+
+Includes 47 unique instructions.
+
+31 general-purpose registers x1-x31
+
+x0 is hardwired to the constant 0
+
+The standard software calling convention uses register x1 to hold the return
+address on a call.
+
+### Base Instruction formats
+
+32 bits all
+
+__R-type__
+
+funct7 | rs2 | rs1 | funct3 | rd | opcode |
+
+__I-type__
+
+imm[11:0] | rs1 | funct3 | rd | opcode |
+
+__S-type__
+
+imm[11:5] | rs2 | rs1 | funct3 | imm[4:0] | opcode |
+
+__U-type__
+
+imm[31:12] | rd | opcode |
+
+### Integer computational instructions
+
+__Integer register-immediate operations__
+
+ADDI rd, rs1, 0 is used to implement the mv rd, rs1 assembler pseudo-instruction
+
+SLTI[U] - set less than equal
+
+ANDI, ORI, XORI perform AND, OR, XOR 
+
+XORI rd, rs1, -1  =  NOT rd, rs in pseudocode
+
+SLLI, SRLI, SRAI
+
+LUI (load upper immediate). Places the U-immediate in the top 20 bits of the
+destination register rd, filling in the lowest 12 bits with zeros.
+
+__Integer register-register operations__
+
+ADD/SLT/SLTU  
+AND/OR/XOR  
+SLL/SRL  
+SUB/SRA  
+
+NOP operation is encoded as ADDI x0, x0, 0
+
+### Control transfer instructions
+
+RV32I provides two types of control transfer instructions: unconditional jumps
+and conditional branches.
+
