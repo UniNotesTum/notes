@@ -162,11 +162,11 @@ __Satz__
 
 1. (K^mxn, +) ist eine abelsche Gruppe
 2. Fuer A,B aus K^mxn und s,s' aus K gelten:
-   s(A+B) = sA + sB  
-   (s+s')A = SA + s'A  
+   s(A+B) = sA + sB
+   (s+s')A = SA + s'A
 3. Seien A, B Matrizen passender Zeilen und Spalten: Assoziativitaet,
    Distributivitaet
-   
+
 Eine Einheitsmatrix hat einsen nur auf der Diagonale. Wir koennen sie mit
 anderen Matrix multiplizieren entweder rechts oder links und die andere Matrix
 bleibt erhalten.
@@ -179,8 +179,76 @@ einer nxm Matrix miteinander multiplizieren.
 
 ## Lineare Gleichungssysteme
 
-LGS - Lineres Gleichungssystem  
+LGS - Lineres Gleichungssystem
 Ax=b
-Ein LGS heisst homogen, falls b = 0, sonst inhomogen.  
+Ein LGS heisst homogen, falls b = 0, sonst inhomogen.
 
 Erweiterte Koefmatix
+
+Wir muessen die LGS so aendern, damit wir die Loesung ablesen koennen. Dabei
+muss man aufpassen, dass die Loesungsmenge nicht veraendert wird. Die erlaubten
+Manipulationen heissen __elementare Zeilenoperationen__. Es gibt drei Arten:
+
+1. Vertauschen zweier Zeilen
+
+2. Multiplikation einer Zeile mit einem Skalar
+
+3. Addieren eines Vielfachen einer Zeile zu einer anderen. Das aendert das
+   System nicht, weil das was aufaddiert wurde ist auch = 0, da Teil des
+   Systems.
+
+__Definition(Zeilenstufenform):__ Eine Matrix A aus K^mxn in Zeilenstufenform,
+falls die folgenden EIgenschaften gelten:  
+
+* Wenn eine Zeile mit k Nullen beginnt, so stehen unter diesen Nullen nur
+  weitere Nullen.
+  
+* Unter dem ersten Eintrag =/ 0 jeder Zeile stehen lauter Nullen. (falls die
+  Zeile nicht nur aus Nullen besteht).
+  
+Die nicht nur Elemente bilden so einer Art Treppe.
+
+A ist in strenger Zeilenstufenform, wenn die ersten beide Bedingungen gelten und
+ueber dem ersten Eintrag =/ jeder Zeile stehen lauter Nullen.
+
+Beispiele:
+
+```
+0 1 2 (a) ist verletzt 
+1 0 0
+0 0 0
+__________
+
+0 1 2 (b) ist verletzt
+0 1 1
+0 0 0
+__________
+
+1 2 -1    ist in Zeilenstufenform, aber nicht strenge Zeilenstufenform
+0 0 -1
+0 0  0
+__________
+
+1 2  0    ist in strenger Zeilenstufenform
+0 0 -1
+0 0  0
+```
+
+Die schoene Form einer erweiterten Koeffizientenmatrix ist die strenge
+Zeilenstufenform.
+
+Umformung einer erweiterten Koeffizientenmatrix.
+
+```
+1 -2 1 -3|-3              1  0  2  1|-3            1  0  2  1|-3
+2  0 4 -2| 2  --------->  0  0  0 -4| 8 ---------> 0  1  0 -1| 2
+0  1 0 -1| 2  (2) - 2(1)  0  1  0 -1| 2  (2)<->(3) 0  0  0 -4| 8
+1  0 2  2| 5  (4) - (1)   0  0  0  1|-2            0  0  0  1|-2
+
+Dann multiplizieren wir die dritte Zeile mit -1/4 multipliziert und dann kann
+man die anderen Zahlen in der vierten Spalte verkuerzen.
+```
+
+
+
+
