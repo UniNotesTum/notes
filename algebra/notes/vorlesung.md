@@ -247,7 +247,54 @@ Umformung einer erweiterten Koeffizientenmatrix.
 
 Dann multiplizieren wir die dritte Zeile mit -1/4 multipliziert und dann kann
 man die anderen Zahlen in der vierten Spalte verkuerzen.
+
+Am Ende bekommt man folgendes System:
+
+1 0 2 0|-1   strenge Zeilenstufenform
+0 1 0 0| 0
+0 0 0 1|-2
+0 0 0 0| 0
 ```
+
+Ein Freheitsgrad - ist wenn eines oder mehrere Variablen Parameter sind.
+
+__Gauss - Algorithmus / Gauss - Elimination__
+
+Das was vorher gemacht wurde.
+
+Input: A
+Output: B in (strenger) Zeilenstufenform
+
+1. Setze B = A
+2. B sei bis zur r-ten Zeile in Zeilenstufenform
+3. Falls r = m, so ist B in Zeilenstufenform. Fuer strenge Zeilenstufenform,
+   gehe zu (8)
+4. Waehle  einen am weitesten links stehenden Eintrag =/ 0 von B unterhalb der
+   r-ten Zeile
+5. Bringe diesen Eintrag in die (r+1)-te Zeile
+6. Erzeuge unterhalb dieses Eintrags lauter Nullen
+7. Gehe zu (2)
+8. Bringe B auf strenge Zeilenstufenform beginnend mit der letzten Zeile.
+
+Algorithmus hat viel mehr Anweundungen, als nut zur Loesung von LGS. Er
+benoetigt O(n^3) Koerperoperationen.
+
+__Algorithmus zur Loesung eines LGS__
+
+Input: LGS Ax=b mit A aus K^mxn, b aus K^n  
+Output:  Loesungsmenge L des LGS
+
+1. Bringe (A|b) in strenge Zeilenstufenform
+2. Sei r die Anzahl der Zeilen, die einen Eintrag =/ 0 haben.
+3. //TODO
+4.
+5.
+
+Unterschied zwischen homogenenen und inhomogenen LGS ist, dass die homogenenen
+immer Loesbar sind. (3) tritt nich ein.
+
+Man kann also bei homogenen Systemen mit der Koeffizientenmatrix statt der
+erweiterten Koeffizientenmatrix arbeiten.
 
 
 
