@@ -296,6 +296,74 @@ immer Loesbar sind. (3) tritt nich ein.
 Man kann also bei homogenen Systemen mit der Koeffizientenmatrix statt der
 erweiterten Koeffizientenmatrix arbeiten.
 
+//TODO
+
+## Varianten der Loesbarkeit
+
+//TODO
+
+## Rangs
+
+rang(In) = n; rang(0) = 0; rang(A) <= min{m, n} fuer A aus K^mxn: Der Rang ist
+durch die Anzahl der Zeilen und die Anzahl der Spalten nach unten beschraenkt.
+
+__Satz(Loesbarkeit von LGS)__
+
+Ein LGS Ax=b ist loesbar genau dann wenn die Koeffizientenmatrix A denselben
+Rang hat wie die erweiterte Koeffizientenmatrix (A|b).
+
+
+## Vektorraeume
+
+__Definition__ Ein Vektorraum(ueber K) ist eine Menge V mit zwei Abbildungen
++:VxV->V, (v,w)->v+w, und KxV->V, (a,v)->a*v, wobei gilt:
+
+1. V ist mit + eine abelsche Gruppe
+2. Fuer alle a aus K, v,w aus V: a(v+w)=av+aw
+3. Fuer alle a,b aus K, v aus V: (a+b)v=av+bv
+4. Fuer alle a,b aus K, v aus V: (ab)v=a(bv)
+5. Fuer alle v aus V: 1*v=v
+
+Aufpassen, dass die Operationen ueberall ueberladen sind. Immer schauen welche
+Objekte ich miteinander verknuepfe durch diese Operation.
+
+Die Elemente v aus V sind die Vektoren.
+
+Beispiele:
+
+1. K^mxn ist K-Vektorraum
+2. der n-dimensionale K^n ist K-Vektorraum (Spezialfall von (1)!)
+3. K ist ein K-Vektorraum (Spezialfall n=1)
+4. V={0} mit 0+0=0 und a*0=0 fuer alle a aus K ist K-Vektorraum, der sogenannte
+   Nullraum.
+5. R ist ein Q-Vektorraum
+6. K[x] = sind alle Polynome und das ist auch ein K-Vektorraum und unendlich
+   Dimensional(mit Polynomaddition und Produkt einer Konstanten mit Polynom)
+7. M Menge und V=Abb(M,K)={f:M->K|f Abbildung} f,g aus V, a aus K: f+g:M->K,
+   x->f(x)+g(x); a*f: M->K, x->a*f(x)
+   
+Das letzte war eine punktweise Definition der Operationen. V ist
+K-Vektorraum. Der Nullvektor ist Nullfunktion f0 mit f0(x)=0 fuer alle x aus M.
+
+Beweise fuer (1) bis (7) durch explizite Kontrolle aller
+Vektorraumeigenschaften.
+
+__Gegenbeispiel__ V abelsche Gruppe mit neutralem Element, aber V=/{0}. av=0
+fuer alle a aus K, v aus V. => Eigenschaften (1)-(4) erfuellt, aber nicht (5),
+da es ja ein v=/0 gibt. V ist kein Vektorraum.
+
+### Rechenregeln fuer Vektoren/Vektorraeume
+
+V K-Vektorraum, a aus K, v aus V
+
+1. a*0 = 0 und 0*v = 0
+
+Begruendung: a*0=a*0+a*0-a*0=a(0+0)-a0=a0-a0=0  
+Dasgleiche gilt fuer die zweite Regel
+
+2. (-a)v=a(-v)=-(av)
+
+3. av=0 => a=0 oder v=0
 
 
 

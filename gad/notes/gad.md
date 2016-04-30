@@ -97,3 +97,38 @@ Bei der Betrachtung nehmen wir an, dass unsere Zahlen binzer kodiert sind.
 Fuer einen Warscheinlichkeitsraum mit Ergebnismenge Teta nennt man eine
 Abbildung X : Teta -> R Zufallsvariable.
 
+### Erwartungswert
+
+Erwartungswerte verhalten sich linear. 
+
+Suche in der Liste. Idee: die haeufigst aufgerufene Elemente sind am Anfang der
+Liste.
+
+Suche in einer selbsorganisierender Liste. Jedes Mal, wenn nach einem Element
+gesucht wird, wird es zum Anfang verschoben.
+
+
+Nach dieser Move-to-front rule wird die doppelte Laufzeit erreicht von dem
+optimalen.
+
+Bedingte Warscheinlichkeit.
+
+### Sequenzen
+
+Realisierung damit Arrays oder Listen. Beide haben ihre Vorteile und Nachteile.
+
+Dynamisches Feld(als array)
+
+Die Kosten von pushbacks und popbacks werden amortisiert. Es gibt selten teuere
+Operationen aber meisten billig und so ergibt sich O(n).
+
+### Doppelt vertettete Liste
+
+Anstatt Elemente zu dealokkieren, fuegen wir diese Knoten in die _free-list_
+hinzu.
+
+### Stacks und Queues
+
+
+
+
