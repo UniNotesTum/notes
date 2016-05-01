@@ -1,0 +1,15 @@
+#include<iostream>
+	
+	int main() {
+		int i = 0, &value = i;
+		int *p = &value;
+		value++;
+		i++;
+		/*
+		while (std::cin >> value) {
+			i += value;
+			}*/
+		std::cout<<"Sum is "<< *p <<std::endl;
+		return 0;
+	}
+	

@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>notes.html</title>
+
+</head>
+
+<body>
+
+<h1>Primer C++</h1>
+
+<h2>I/O</h2>
+
+<p>Use iostream library with its fundamental types istream and ostream. This
+library defines four standard I/O objects: cin, cout, cerr, clog.</p>
+
+<p>Namespaces allow us to avoid inadvertent collisions between the names we define
+and uses if thise same names inside a library. All the names defined by the
+standard library are in std.</p>
+
+<p><code>c++
+// read until the end of file
+while (std::cin &gt;&gt; value)
+</code></p>
+
+<p>An <code>istream</code> that is in an invalid state will cause the condition to yield
+false.</p>
+
+<p>Headers, that are not from the standard library are enclosed in quotes("").</p>
+
+<h2>Primitive types</h2>
+
+<p>Arithmetic types are divided into two categories: integral types and
+floating=point types.</p>
+
+<p>bool, char, wchar<em>t, char16</em>t, char32_t, short, int, long, long
+long, float, double, long double</p>
+
+<p>Among operations that many types support is the ability to convert objects of
+the given type to other, related types.</p>
+
+<p>If we use both unsigned and int values in an arithmetic expression, the int
+value ordinarily is converted to unsigned.</p>
+
+<h3>Literal</h3>
+
+<p>A value, such as 42, is known as a literal because its value self-evident. Every
+literal has a type. The for and value of a literal determine its type.</p>
+
+<p>We can write an integer literal using decimal, octal or hexadecimal notation.</p>
+
+<p>If we write what appears to be a negative decimal literal, for example, -42, the
+minus sign is not part of the literal. The minus sign is an operator that
+negates the value of its operand.</p>
+
+<p>The type of a string literal is array of constant char.</p>
+
+<p><code>c++
+// multiline string literal
+std::cout &lt;&lt; "a really, really long string literal "
+              "that spans two line" &lt;&lt; std::endl;
+</code></p>
+
+<p>Some special characters cannot be entered directly and for them we use special
+escape sequences. We can also use some more geneneralized escape sequences,
+which is \x followed by one or more hexadecimal digits or a \ followed by one,
+two, ore three octal digits.
+The word nullptr is a pointer literal.</p>
+
+<p>Uninitialized objects of built-on type defined inside a dunction body have
+undefined value. Objects of class type  that we do not explicitly initialize
+have a value that is defined by the class.</p>
+
+<p>{ } can be used to initialize objects, they prohibit the loss of information
+during this process. For instance int i = { 3.14 } is illegal.</p>
+
+<h3>Variable declaration and definition</h3>
+
+<p>A <em>declaration</em> makes a name known to the program. A file that wants to use a
+name defined elsewhere includes a declaration for that name. A definiton creates
+the associated entity.</p>
+
+<p>In addition to specifying the name and type, a definition also allocates storage
+and may provide the variable with an initial value.</p>
+
+<p>To obtain a declartaion we add the <strong>extern</strong> keyword.</p>
+
+<p><em>extern int i; // declares but does not define i</em></p>
+
+<p><strong>Variables must be defined exactly once, but can be declared many times.</strong></p>
+
+<p>C++ is a statically typed language, which means that types are checked at
+compile time. The process by which types are checked is referred to as type
+checking.</p>
+
+<h3>Identifiers and scopes</h3>
+
+<p>```c++</p>
+
+<h1>include <iostream></h1>
+
+<p>int reused = 42;</p>
+
+<p>int main() {
+    int unique = 0;
+    std::cout &lt;&lt; reused &lt;&lt; " " &lt;&lt; unique &lt;&lt; srd::endl;
+    int reused = 0; // new local object named hides global reused
+    // explicitly request the global reused
+    std::cout &lt;&lt; ::reused &lt;&lt; " " &lt;&lt; unique &lt;&lt; std::endl;
+    return 0;
+}
+```</p>
+
+<h2>Compound types</h2>
+
+<p>A compund type is a type that is defined in terms of another type. (references
+and pointers etc)</p>
+
+<p>The new standard introduced new kind of reference an "rvalue reference".</p>
+
+<p>A reference type "refers to" another type. (&amp;d, where d is the name being
+declared)</p>
+
+<p>http://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in</p>
+
+<p>Both pointers and references occupy the same amound of storage. References must
+be initalized immediately after declaration and cannot be redefined later
+on. They are often used for function parameters and return types.</p>
+
+<p>A pointer "points to" another type. Unlike a reference, a pointer is an object
+in its own right. Pointers can be assigned and copied; a single pointer can
+point to several different objects over its lifetime.</p>
+
+<p><code>c++
+int ival - 42;
+int *p = &amp;ival; // p hold the address of ival
+</code></p>
+
+<p>The second statement defines p as a pointer to int and initalizes p to point to
+the int object named ival. Because references are not objects, they don't have
+addresses. Hence, we may not define a pointer to a reference.</p>
+
+<p>The types must match because the type of the pointer is used to infer the type
+of the object to which the pointer points.</p>
+
+<p>When we assign to *p, we are assigning to the object to which p points.</p>
+
+<p>Preprocessor is a program that runs before the compiler. Preprocessor variables
+are managed by the preprocessor, and are not part of the std namespace.</p>
+
+<p><strong>void* Pointer</strong> is a special pointer type that can hold the address of any
+object. There are only a limited number of things we can di with it: compare to
+other pointers, pass or return from a function, assign to another void* pointer.</p>
+
+<p><code>c++
+int i = 42;
+int *p;  // p is a pointer to int
+int *&amp;r = p; // r is a reference to the pointer p
+r = &amp;i; // r refers to a pointer; assigning &amp;i to r makes p point to i
+*r = 0; .. dereferencing r yields i, the object to which p points, changes i to 0
+</code></p>
+
+<p>The easiest way to understand the type of r is to read the definition right to
+left.</p>
+
+<h3>const Qualifier</h3>
+
+<p>It makes a variable unchangeable in code, but the variable must be directly
+initialized either at runtime or compiletime.</p>
+
+<p>const int buffSize = 512;</p>
+
+<p>The compiler will usually replace uses of the variable with its corresponding
+value during compilation.</p>
+
+<p><strong>By default const Objects are local to a file</strong></p>
+
+<p>To substitute the value, the compiler has to see the variable's
+initalizer. Every file that uses the cont must have access to its initializer.</p>
+
+<p>To define a single instance of a const variable, we use the keyword extern on
+both its definiton and declaration.</p>
+
+<p><code>c++
+// file_1.cc defines and initialized a const that is accessible to other files
+extern cont int buffSize = fcn();
+// file_1.h
+extern const int bufSize; // same bufSize as defined in file_1.cc
+</code></p>
+
+<p>References to const types don't allow to change the referenced objects, so they
+must be const as well.</p>
+
+<p>We can bind a reference to const to a non const object, a literal, or more
+general expression:</p>
+
+<p><code>c++
+int i = 42;
+const int &amp;r1 = i;
+const int &amp;r2 = 42;
+const int &amp;r3 = r1 * 2;
+int &amp;r4 = r * 2; // error: r4 is a plain, non const reference
+</code>
+When we bind an int to a double the compiler creates a temporary variables that
+is constand that is the integer value of the double, and to this temporary value
+wird gebounded. That's why only const binding for such things is possible.</p>
+
+<p><code>c++
+double dval = 3.14;
+const int &amp;ri = dval;
+</code></p>
+
+<p><strong>A reference to const may refere to an object that is not constant.</strong></p>
+
+<h3>Pointers to const</h3>
+
+<p>We may store the address of a const object only in a pointer to const.</p>
+
+<p>We can use a pointer to a const to point to a non const object.</p>
+
+<p>By putting <em>const</em> after the *, we indicate that the pointer itself and not the
+pointed object is constant.</p>
+
+<p><code>c++
+int errNumb = 0;
+int *const curErr = &amp;errNumb;
+const double pi = 3.14159;
+const double *const pip = &amp;pi;
+</code></p>
+
+<p><strong>Top-level const</strong> indicates that a pointer itself is a const, <strong>low-level</strong>
+const means that te object it points to is a const.</p>
+
+<p>Top-level const is ignored by copying and low-level not.</p>
+
+<h3>Constant expressions</h3>
+
+<p>These are expressions whose value cannot change and that can be evaluated at
+compile time. A literal is a constant expression.</p>
+
+<p>Under new standard we use <strong>constexpr</strong> to determine if an expression is
+constant.</p>
+
+<p><code>c++
+constexpr int mf = 20; // 20 is a constant expression
+constexpr int limit  = mf + 1; // mf + 1 is a constant expression
+constexpr int sz = size(); // ok only if size is a constexpr function
+</code></p>
+
+<p>For constant expressions we can use only simple types like the arithmetic,
+reference and pointer types, because they are simple enough to have literal
+values.
+Salce_item class and the library IO and string types are not literal types.</p>
+
+<p>A constexpr expression for pointers applies to the pointer and not the type it
+points to.</p>
+
+<p>Consexpr imposes top-level const.</p>
+
+<p><code>c++
+constexpr int *np = nullptr; // np is a constant pointer to int that is null
+int j = 0;
+constexpr int i = 42; // type of i is const int
+// i and j must be defined outside any function
+constexpr const int *p = &amp;i; // p is a constant pointer to const int i
+constexpr int *p1 = &amp;j; // p1 is a constant pointer to the int j
+</code></p>
+
+<h3>Dealing with types</h3>
+
+<p>Type aliases are names for other types, that simplify the use of complicated
+type names.</p>
+
+<p><code>c++
+typedef double wages;
+typedef wages base, *p; // base is a synonym for double, p for double*
+</code>
+The new standard give us another way to define new types:</p>
+
+<p><code>c++
+using SI = Sales_item;
+</code></p>
+
+<h3>Using the auto type specifier</h3>
+
+<p>The type is deduced from the type of the result of the expression.</p>
+
+<p><code>c++
+auto i = 0, *p = &amp;i; // ok: i is an int and p is a pointer on an int
+auto sz = 0, pi = 3.14; // not ok, different types
+</code></p>
+
+<p>Use <strong>decltype</strong> to deduce the type of an expression.</p>
+
+<h3>Defining our own data structures</h3>
+
+<p><code>c++
+struct Sales_data {
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
+};
+</code></p>
+
+<p>Preprocessor works with # expressions like #include. It copies before the
+compiler all the code that's held in these header into the file. C++ also offers
+header guards:
+e
+```c++</p>
+
+<h1>ifndef SALES<em>DATA</em>H</h1>
+
+<h1>define SALES<em>DATA</em>H</h1>
+
+<p>struct Sales<em>data {
+    std::string bookNo;
+    unsigned units</em>sold = 0;
+    double revenue = 0.0;
+}</p>
+
+<h1>endif</h1>
+
+<p>```</p>
+
+<h2>Chapter 3. Strings, Vectors, and Arrays</h2>
+
+<p>A string is a variable-length sequence of characters. A vactor holds a
+variable-length sequence of objects of a given type.</p>
+
+<p>std::getline</p>
+
+<p>size is a member of string </br>
+Instead of an int it returns a string::size_type</p>
+
+<p>Some classes define several companion independent types, like size_type.</p>
+
+<p>```c++
+string s("Hello World!!!");
+for (auto &amp;c : s)
+    c = toupper(c);
+cout &lt;&lt; s &lt;&lt; endl;</p>
+
+<p>// process characters in the first word and make them big
+for (decltype(s.size()) index = 0;
+     index != s.size() &amp;&amp; !isspace(s[index]); ++index)
+         s[index] = toupper(s[index]);</p>
+
+<p>// ways to initialize a vector</p>
+
+<p>vector<T> v1; //default init, empty
+vector<T> v2(v1); // copy
+vector<T> v3(n, val);
+vector<T> v4{a, b, c, ...};</p>
+
+<p>// adding elements
+for (int i =0; i != 100; ++i)
+    v2.push_back(i);
+```</p>
+
+<p>It is usually better not to define a  specific size for a vector and let it grow
+dynamically, it boosts its efficiency.</p>
+
+<h3>Iterators</h3>
+
+<p><code>c++
+// b denotes the first element and e denotes one past the last element in v
+auto b = v.begin(), e = v.end();
+</code>
+An iterator is a pointer on an element in a collection. All the operators for
+iterators are overriden, so it's pretty clear what to do.</p>
+
+<p>```c++
+// turns the first character to an uppercase</p>
+
+<p>string s("some string");
+if (s.begin() != s.end()) {
+    auto it = s.begin();
+    <em>it = toupper(</em>it);
+}</p>
+
+<p>// change the first word to uppercase</p>
+
+<p>for (auto it = s.begin(); it != s.end() &amp;&amp; !isspace(<em>it); ++it)
+    *it = toupper(</em>it);
+```</p>
+
+<p>We use != and iterators, because all of the shit in different libraries has
+implemented such behaviour and thus we don't to have to worry about it not
+being there.</p>
+
+<p>There are two types of iterators cont_iterator and normal iterator. And you
+always get the first one if the vector or something else is defined const and
+you also get a constant iterator when using cbegin or cend functions.</p>
+
+<h3>Arithmetic operations on iterators</h3>
+
+<p>You can use any additions and  subtractions that come into your mind. Everything
+is overloaded.</p>
+
+<p>After a subtraction of two iterators you get a difference_type.</p>
+
+<p><code>c++
+// binary search on a sorted vector v
+// key is the element
+int binarysearch(vector&lt;int&gt; v, int key) {
+    auto b = v.begin(), e = v.end();
+    while (b != e) {
+        auto mid = b + (b - e)/2;
+        if (*mid == key) return 1;
+        if (*mid &lt; key) e = mid;
+            else b = mid + 1;
+    }
+    return 0;
+}
+</code></p>
+
+<h3>Arrays</h3>
+
+<p>Arrays must be initialized with a concrete dimension, which has to be a constant
+expression.</p>
+
+<p>Char array have a special feature, they can be instantiated from a string, but
+do not forget the special character at the end, so reserve some space for it.</p>
+
+<p>Cannot initialize one array with another or assign one to another.</p>
+
+<p><strong>Reading complicated declarations</strong> If there are no parethesize just read from
+right to left, otherwise from inside out and then from right to left.</p>
+
+<p>size_t is a machine-specific unsigned type that is guaranteed to be large enough
+to hold the size of any object in memory. It's defined in cstddef.</p>
+
+<p>In most expressions, when we use an object of array type, we are really using a
+pointer to the first element in that array.</p>
+
+<p><code>c++
+int ia[] = {1, 2, 3};
+auto ia2(ia);
+ia = 42; // error, because auto gives you int*
+</code></p>
+
+<p>$$*ia[0] = ia$$</p>
+
+<p>But!!! This conversion doesn't happen, when we use decltype(ia).</p>
+
+<p>We can use pointers on arrays as iterators, to get the pointer on the first
+element we just assign the array var, and the last by taking a reference to the
+first nonexisting element.</p>
+
+<p>The new library includes two new functions, named <strong>begin and end</strong>, that are global
+and take an array as an argument. They did this, because otherwise it would be
+error-prone.</p>
+
+<p><code>c++
+int ia[] = {1, 2, 3};
+int *beg = begin(ia);
+int *last = end(ia);
+</code></p>
+
+<p>All the operations on pointers are the same as on iterators. But the result of
+two subtracting two pointers is a library type named <strong>ptrdiff_t</strong>.</p>
+
+<p>We can use relational operators on pointers, that point to elements of the same
+array, but not to unrelated objects.</p>
+
+<p><code>c++
+int *p = &amp;ia[2];    // p points to the element indexed by 2
+int j = p[1];       // p[1] is equivalent to *(p+1)
+int k = p[-2];      // p[-2] is the same as ia[0]
+</code></p>
+
+<p>Unlike subscripts for <em>vector</em> and <em>string</em>, the index of the built-in subscript
+operator is not an unsigned type.</p>
+
+<p>A thing to note about multidimensional arrays. When using cool nested for (:),
+all the outer loop elements are actually pointers on other arrays. If we leave
+it like that, the compiler will just copy the pointers and in the end we will
+get an error. So we should do the following:</p>
+
+<p><code>c++
+for (const auto &amp;row : ia)
+    for (auto col : row)
+        cout &lt;&lt; col &lt;&lt; endl;
+</code></p>
+
+<p>Oh btw, let me show you some cool shit.</p>
+
+<p><code>c++
+for (auto p = ia; p != ia + 3; ++p) {
+    for (auto q = *p; q != *p + 4; ++q)
+        cout &lt;&lt; *q &lt;&lt; ' ';
+    cout &lt;&lt; endl;
+}
+</code></p>
+
+<h2>Chapter 4</h2>
+
+<h3>lvalue and rvalue</h3>
+
+<p>lvalue means that this is is addressible in memory and rvalue is everything
+else.</p>
+
+<p>But it's not that simple. const objects may not be left0hand operand of an
+assignment. We can always use an lvalue, when an rvalue is required.</p>
+
+<h3>Order of evaluation, precedence, associativity</h3>
+
+<p>Assignment is right-associative.</p>
+
+<p>Precedence of ++ is higher than of *.</p>
+
+<h3>The sizeof operator</h3>
+
+<p>sizeof(type), sizeof expr.</p>
+
+<p>It returns the size in bytes, the result of it is a constant expression of type
+size_t.</p>
+
+<h3>Named casts</h3>
+
+<p>static<em>cast, dynamic</em>cast, const<em>cast, reinterpret</em>cast.</p>
+
+<p>dynamic_cast supports runtime type identification.</p>
+
+<p>```c++
+double slope = static_cast<double>(j) / i;</p>
+
+<p>//convert something that the compiler cant
+void* p = &d;
+double *dp = static_cast<double*>(p);
+```</p>
+
+<p>const_cast casts away the const.</p>
+
+</body>
+</html>
