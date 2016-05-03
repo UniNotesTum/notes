@@ -1299,3 +1299,174 @@ array<int, 10>::size_type i;
 To use an array type, we must both specify the type and the size.
 
 Using assign (sequential containers only)
+
+### Strings
+
+## Algorithms
+
+All algorithms are container independent. They only use iterators on those
+containers, whichhave their own overloaded operations.
+
+These algs do not delete or insert elements, they can rearrange them or some
+other stuff like that.
+
+But there is a special iterator called the insert iterator, which may append the
+underlying data structures. 
+
+```c++
+auto it = back_inserter(vec); // assigning through it adds elements to vec
+*it = 42; // vec now has one element with 42
+
+// read-only algs
+// sum the elements in vec starting the summation with the value 0
+int sum = accumulate(vec.cbegin(), vec.cend(), 0);
+
+// operates on two sequences, assumes the second sequence has enough elements
+equal(roster1.cbegin(), roster1.cend(), roster2.cbegin());
+
+// algs that write to cont types
+fill(vec.begin(), vec.end(), 0);
+fill(vec.begin(), vec.begin() + vec.size()/2, 10);
+// they do not check before they write, so be cautious
+
+//copy
+int a1[] = {0,1,2,3,4,5,6,7,8,9};
+int a2[sizeof(a1)/sizeof(*a1)];
+auto ret = copy(begin(a1), end(a1), a2);
+// the value returned is the value of its destination iterator
+
+// replace algs..
+
+// use back_inserter to grow destination as needed
+replace_copy(list.cbegin(), list.cend(), back_inserter(ivec), 0, 42);
+// it lets the input container stay the same
+
+// sorted
+// unique
+```
+
+### Customizing operations
+
+### Passing a function to an algorithm
+
+Assuming we want to sort a vector by length, we can use the overloaded function,
+which takes the third argument that is a __predicate__.
+
+It's an expression that can be called and that returns a value that can be used
+as a condition. _Unary or binary predicates_ are used.
+
+```c++
+bool isShorter(const string &s1, const string &s2) {
+	return s1.size() < s2.size();
+}
+
+sort(words.begin(), words.end(), isShorter);
+```
+
+stable_sorts makes equal words remain on their old positions relatively to each
+other.
+
+find_if takes an unary predicate as the third argument. 
+
+Callables: functions, function pointers, classes that overload the function-call
+operator, and __lambda expressions__.
+
+```
+[captue list] (parameter list) -> return type { function body }
+```
+
+Capture list is an (often empty) list of local variables defined in the
+enclosing function. WE may not omit the capture list and the return body.
+
+```c++
+auto f = [] { return 42; }
+cout << f() << endl;
+```
+
+If we omit the return type, the lambda has an inferred return type that depends
+on the code in the funciton body. If the function body is just a return
+statemenet, the return type is inferred form the type of the expression that is
+returned. Otherwise, the return type is void.
+
+Unlike ordinary functions a lambdas may not have deafult arguments.
+
+```c++
+[] (const string &a, const string &b) {
+	return a.size() < b.size();
+}
+
+auto wc = find_if(words.begin(), words.end(), [sz](const string &a) {
+	return a.size() >= sz;
+});
+```
+
+The call to find_if returns an iterator to the first element that is at least as
+long as the given sz, or a copy of words.end() if no such elements exists.
+
+
+make_plural, for_each
+
+The capture list is used for local nonstatic variables only; lambdas can use
+local statics and variables declared outside of the function directly.
+
+When we pass a lambda to a function, we are defining both a new type and an
+object of that type.
+
+We can both capture by reference or by value.
+
+Let the compiler do the implicit catch by just typing in & or =.
+
+When we mix implicit and explicit captures, the explicit;y captured variables
+must use the alternate form.
+
+By default, a lambda may ot change the value of a variable that it copies by
+value. If we want to be able to change the value of a captured variable, we must
+follow the parameter list with the keyword _mutable_.
+
+Trailing returns.
+
+```c++
+transform(vi.begin(), vi.end(), vi.begin(), [](int i) -> int {
+	if (i < 0) return -i; else return i; }
+});
+```
+
+The transform function takes three iterators and a callable. The first two
+iterators denote an input sequence and the third a destination. The alg calls
+the given callable on each element in the input sequence and wruites the result
+to the destination.
+
+### Binding functions
+
+The functional header defines a function called bind, which takes our function
+as the first parameter and another parameter arg_list, which can have _n, which
+ae placeholders for our parameters. This bind return another callable, that
+calls our function.
+
+```c++
+auto check6 = bind(check_size, _1, 6);
+string s = "hello";
+bool b1 = check6(s); // check6(s) calls check_size(s, 6)
+
+// instead of a lambda expression
+auto wc = find_if(words.begin(), words.end(), [sz](const string &sz)...)
+
+auto wc = find_if(words.begin(), words.end(), bind(check_size, _1, sz));
+```
+
+The _n names are defined in a namespace named _placeholders_, which is itself
+defined inside the std namespace. 
+
+We should have used at the beginning:
+
+```c++
+using std::placeholders::_1;
+```
+
+### Revisiting iterators
+
+The library defines several additional kinds of iterators in the iterator
+header.
+
+
+
