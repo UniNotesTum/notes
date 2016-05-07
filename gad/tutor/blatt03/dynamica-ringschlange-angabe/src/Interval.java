@@ -70,12 +70,14 @@ class NonEmptyInterval extends Interval {
     /*
      * Todo
      */
+		return 0;
   }
 
   @Override public boolean isEmpty () {
     /*
      * Todo
      */
+		return true;
   }
 }
 
@@ -102,11 +104,13 @@ class EmptyInterval extends Interval {
     /*
      * Todo
      */
+		return 0;
   }
 
   @Override public boolean isEmpty () {
     /*
      * Todo
      */
+		return true;
   }
 }

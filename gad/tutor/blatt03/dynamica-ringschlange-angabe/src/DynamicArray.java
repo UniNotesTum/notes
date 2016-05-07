@@ -1,3 +1,5 @@
+import java.lang.StringBuilder;
+
 /**
  * Diese Klasse implementiert ein dynamisches Feld.
  */
@@ -43,11 +45,44 @@ public class DynamicArray {
    * @param lengthNew die neue Länge des in Benutzung befindlichen Feldbereiches 
    */
   private void reallocate (Interval usage, int lengthNew) {
-    /*
-     * Todo
-     */
+      if (lengthNew > getInnerLength())
+	  resize(getInnerLength()*growthFactor, usage);
+
+      if (lengthNew < getInnerLength() / maxOverhead)
+	  resize(getInnerLength()/maxOverhead, usage);
+      
   }
 
+
+    private void resize(int size, Interval usage) {
+
+	int start = usage.getFrom();
+	int end   = usage.getTo();
+
+	int[] dest = new int[(size>0)?size:1];
+
+        if (size > 0) {
+
+            int k = 0;
+
+            if (start < end) {
+                for (int i = start; i < end; i++) {
+                    dest[k++] = elements[i];
+                }
+            } else {
+                for (int i = start; i < getInnerLength(); i++) {
+                    dest[k++] = elements[i];
+                }
+                for (int i = 0; i <= end; i++) {
+                    dest[k++] = elements[i];
+                }
+            }
+        }
+
+	elements = dest;
+	
+    }
+    
   /**
    * Dieser Konstruktor initialisiert ein dynamishes Feld. Es muss dabei gelten,
    * dass
@@ -90,9 +125,17 @@ public class DynamicArray {
    * befinden, die vor dem Auruf in Verwendung waren
    */
   public Interval reportUsage(Interval usage, int minSize) {
-    /*
-     * Todo
-     */
+
+      int oldSize = getInnerLength();
+      
+      reallocate(usage, minSize);
+
+      if (oldSize != getInnerLength()) {
+	      return new NonEmptyInterval(0, (minSize>2)?minSize-2:0); //es muesste usage.getSize() geben!
+      }
+
+      return usage;
+      
   }
 
   /**
@@ -103,9 +146,7 @@ public class DynamicArray {
    * @return das ermittelte Element
    */
   public int get(int index) {
-    /*
-     * Todo
-     */
+      return elements[index];
   }
   
   /**
@@ -116,9 +157,17 @@ public class DynamicArray {
    * @param value der Wert des zu setzenden Elementes
    */
   public void set(int index, int value) {
-    /*
-     * Todo
-     */
+      elements[index] = value;
   }
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder("[ ");
+		for (int e : elements) {
+			builder.append(e + ", ");
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 
 }
