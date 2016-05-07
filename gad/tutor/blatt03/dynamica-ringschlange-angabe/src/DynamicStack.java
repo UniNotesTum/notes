@@ -41,7 +41,10 @@ public class DynamicStack {
 		if (length == 0) throw new RuntimeException("No elements");
       length--;
       int element = dynArr.get(length);
-      dynArr.reportUsage(new NonEmptyInterval(0, length - 1), length);
+      if (length == 0)
+          dynArr.reportUsage(new NonEmptyInterval(0, 0), length);
+      else
+        dynArr.reportUsage(new NonEmptyInterval(0, length - 1), length);
       return element;
   }
 
