@@ -46,40 +46,38 @@ public class DynamicArray {
    */
   private void reallocate (Interval usage, int lengthNew) {
       if (lengthNew > getInnerLength())
-	  resize(getInnerLength()*growthFactor, usage);
+	    resize(getInnerLength()*growthFactor, usage);
 
       if (lengthNew < getInnerLength() / maxOverhead)
-	  resize(getInnerLength()/maxOverhead, usage);
+	    resize(lengthNew*growthFactor, usage);
       
   }
 
 
     private void resize(int size, Interval usage) {
 
-	int start = usage.getFrom();
-	int end   = usage.getTo();
+			if (usage instanceof EmptyInterval) {
+				elements = new int[growthFactor];
+				return;
+			}
+			
+			int start = usage.getFrom();
+			int end   = usage.getTo();
 
-	int[] dest = new int[(size>0)?size:1];
+			int[] dest = new int[(size>0)?size:1];
 
-        if (size > 0) {
+             if (size > 0) {
 
-            int k = 0;
+                 int k = 0;
 
-            if (start < end) {
-                for (int i = start; i < end; i++) {
-                    dest[k++] = elements[i];
-                }
-            } else {
-                for (int i = start; i < getInnerLength(); i++) {
-                    dest[k++] = elements[i];
-                }
-                for (int i = 0; i <= end; i++) {
-                    dest[k++] = elements[i];
-                }
+                 for (int i = start; ; i = (i+1)%getInnerLength()) {
+                     dest[k++] = elements[i];
+                     if (i == end) break;
+                 }
+
             }
-        }
 
-	elements = dest;
+				elements = dest;
 	
     }
     
@@ -130,8 +128,12 @@ public class DynamicArray {
       
       reallocate(usage, minSize);
 
+
       if (oldSize != getInnerLength()) {
-	      return new NonEmptyInterval(0, (minSize>2)?minSize-2:0); //es muesste usage.getSize() geben!
+          if (getInnerLength() < 2 || usage.getSize(oldSize) == 0) {
+              return new NonEmptyInterval(0, 0);
+          }
+	      return new NonEmptyInterval(0, usage.getSize(oldSize) - 1);
       }
 
       return usage;

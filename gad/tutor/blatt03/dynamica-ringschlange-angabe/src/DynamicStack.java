@@ -25,8 +25,12 @@ public class DynamicStack {
    * @param value das Element, das auf den Stapel gelegt werden soll
    */
   public void pushBack (int value) {
-        dynArr.reportUsage(new NonEmptyInterval(0, length), ++length);
-		dynArr.set(length - 1, value);
+		if (length == 0)
+			dynArr.reportUsage(new EmptyInterval(), 1);
+		else
+			dynArr.reportUsage(new NonEmptyInterval(0, length - 1), length + 1);
+		dynArr.set(length, value);
+		length++;
   }
 
   /**
@@ -34,9 +38,10 @@ public class DynamicStack {
    * @return das entfernte Element
    */
   public int popBack () {
+		if (length == 0) throw new RuntimeException("No elements");
       length--;
       int element = dynArr.get(length);
-      dynArr.reportUsage(new NonEmptyInterval(0, length), length);
+      dynArr.reportUsage(new NonEmptyInterval(0, length - 1), length);
       return element;
   }
 

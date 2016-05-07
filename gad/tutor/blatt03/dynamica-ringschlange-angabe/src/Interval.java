@@ -67,17 +67,17 @@ class NonEmptyInterval extends Interval {
   @Override public int getSize (int baseSize) {
     if(to >= baseSize || from >= baseSize)
       throw new RuntimeException("Invalid interval for this base size!");
-    /*
-     * Todo
-     */
+
+		if (to > from) return to - from + 1;
+
+		if (to < from) return (baseSize - from) + to + 1;
+		
 		return 0;
+		
   }
 
   @Override public boolean isEmpty () {
-    /*
-     * Todo
-     */
-		return true;
+		return to == from;
   }
 }
 
@@ -101,16 +101,10 @@ class EmptyInterval extends Interval {
   }
 
   @Override public int getSize (int baseSize) {
-    /*
-     * Todo
-     */
 		return 0;
   }
 
   @Override public boolean isEmpty () {
-    /*
-     * Todo
-     */
 		return true;
   }
 }

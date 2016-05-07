@@ -44,7 +44,8 @@ public class RingQueue {
   public void enqueue(int value) {
       Interval interval = dynArr.reportUsage(new NonEmptyInterval(from, to), ++size);
       from = interval.getFrom();
-      to   = (interval.getTo() + 1)%dynArr.getInnerLength();
+      if (size == 1) to = interval.getTo()%dynArr.getInnerLength();
+      else to = (interval.getTo() + 1)%dynArr.getInnerLength();
       dynArr.set(to, value);
   }
   
@@ -54,11 +55,16 @@ public class RingQueue {
    * @return das entfernte Element
    */
   public int dequeue() {
-    int element = dynArr.get(from);
-    Interval interval = dynArr.reportUsage(new NonEmptyInterval(from, to), --size);
-    from = (interval.getFrom()+1)%dynArr.getInnerLength();
-    to   = interval.getTo();
-    return element;
+      if (size == 0) throw new RuntimeException("No elements");
+      size--;
+      int element = dynArr.get(from);
+      if (from != to) {
+          Interval interval = dynArr.reportUsage(new NonEmptyInterval(from, to), size);
+          from = (interval.getFrom() + 1) % dynArr.getInnerLength();
+          to = interval.getTo();
+      }
+      if (from == to) from = to = 0;
+      return element;
   }
 
   public static void main(String[] args) {
@@ -66,6 +72,22 @@ public class RingQueue {
       queue.enqueue(1);
       queue.enqueue(2);
       queue.enqueue(3);
+      queue.enqueue(4);
+      System.out.println(queue.dequeue());
+      System.out.println(queue.dequeue());
+      queue.enqueue(5);
+      queue.enqueue(6);
+      queue.enqueue(7);
+      System.out.println(queue.dequeue());
+      System.out.println(queue.dequeue());
+      System.out.println(queue.dequeue());
+      System.out.println(queue.dequeue());
+      System.out.println(queue.dequeue());
+      queue.enqueue(8);
+      queue.enqueue(9);
+      queue.enqueue(10);
       System.out.println(queue.dynArr);
   }
+
+
 }
