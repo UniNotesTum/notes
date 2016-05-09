@@ -50,10 +50,14 @@ public class Assignment2 {
 		byte[] macBuff = new byte[6];
 
 		int k = 0;
-		
-		for (String b : hwaddr.trim().split(":")) {
-			macBuff[k++] = Byte.parseByte(b);
-		}
+
+		try {
+
+			for (String b : hwaddr.trim().split(":")) {
+				macBuff[k++] = (byte) ((Character.digit(b.charAt(0), 16) << 4) + Character.digit(b.charAt(1), 16));
+			}
+
+		} catch (NumberFormatException e) { return null; }
 
 		return macBuff;
 		
