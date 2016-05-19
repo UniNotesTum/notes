@@ -27,10 +27,10 @@ Keine integer Rechenbefehle verursachen arithmetische Ausnahmen.
 
 **Register-Immediate**
 
-```
-ADDI rd, rs1, 0   # addiert 12-bit immediate mit dem Register r1, Ziel: rd
-SLTI rd, rs1, 0   # set let than immediate, rd = 1, falls rs1 < 0, sonst rd=0
-SLTIU rd, rs1, 1  # dasselbe, aber unsigned
+```asm
+ADDI rd, rs1, 0  ; addiert 12-bit immediate mit dem Register r1, Ziel: rd
+SLTI rd, rs1, 0  ; set let than immediate, rd = 1, falls rs1 < 0, sonst rd=0
+SLTIU rd, rs1, 1 ; dasselbe, aber unsigned
 ```
 
 ANDI, ORI, XORI sind logische Operationen, die AND, OR und XOR entsprechen. Ihr Befehlsformat ist gleich dem obigen.
@@ -39,9 +39,9 @@ Es gibt logische und arithmetische Shifts (SLLI, SRLI, SLAI, SRAI). Die Anzahl d
 
 In den nächsten beiden Befehlen ist die immediate 20 bit lang, anstatt 12.
 
-```
-LUI dest, immediate   # load upper immediate
-AUIPC dest, immediate   # add upper immediate to pc
+```asm
+LUI dest, immediate  ; load upper immediate
+AUIPC dest, immediate  ; add upper immediate to pc
 ```
 
 LUI platziert die Immediate in die höheren 20 bits des Zielregisters und die unteren 12 werden mit 0 gefüllt.
@@ -56,7 +56,7 @@ AND/OR/XOR   dest, src1, src2
 SLL/SRL      dest, src1, src2
 SUB/SRA      dest, src1, src2
 
-SLTU rd, x0, rs2  # setzt rd zu 1 nur wenn rs2 = 0
+SLTU rd, x0, rs2 ; setzt rd zu 1 nur wenn rs2 = 0
 ```
 
 **NOP Instruktion**
@@ -68,13 +68,13 @@ ADDI x0, x0, 0
 **Control Transfer Instruktionen**
 
 ```asm
-JAL rd, immediate   # rd = (pc + 4), Immediate 20 bit lang, range +-1MiB
+JAL rd, immediate  ; rd = (pc + 4), Immediate 20 bit lang, range +-1MiB
 ```
 
 JAL (jump and link) setzt den Befehlszähler auf den Wert (pc + immediate) und der vorherige Wert des (Befehlszählers + 4) wird in den Register rd gespeichert, der als eine Rücksprungadresse verwendet werden kann. Nach den Konventionen benutzt man dafür x1 und wenn JAL ein unconditional jump ist, dann x0.
 
 ```asm
-JALR rd, rs1, immediate   # rd = (pc + 4), Immediate 12 bit
+JALR rd, rs1, immediate  ; rd = (pc + 4), Immediate 12 bit
 ```
 
 JALR setzt den Befehlszähler auf (rs1 + imm). Zusammen mit dem Befehl LUI kann man auf eine beliebige Adresse im Adressraum springen.
@@ -84,8 +84,8 @@ JALR setzt den Befehlszähler auf (rs1 + imm). Zusammen mit dem Befehl LUI kann 
 Ein wichtiger Aspekt der Risc-V ISA ist, dass es keine flags gibt, stattdessen werden Branchbefehle benutzt.
 
 ```asm
-BEQ/BNE src1, src2, offset  # branch equal/not equal
-BLT[U]/BGE[U]  src1, src2, offset   # branch less/greate than
+BEQ/BNE src1, src2, offset ; branch equal/not equal
+BLT[U]/BGE[U]  src1, src2, offset  ; branch less/greate than
 ```
 
 Falls die Bedingung erfüllt wird, wird der offset zu dem Befehlszähler addiert.
@@ -93,8 +93,8 @@ Falls die Bedingung erfüllt wird, wird der offset zu dem Befehlszähler addiert
 **Load/Store Instruktionen**
 
 ```
-LW/LH/LB rd, rs1, offset  # kopiert 32/16/8 bits vom Speicher von der Adresse (rs1+offset)
-SW/SH/SB rd, rs1, offset  # kopiert den Wert vom rd in den Speicher
+LW/LH/LB rd, rs1, offset ; kopiert 32/16/8 bits vom Speicher von der Adresse (rs1+offset)
+SW/SH/SB rd, rs1, offset ; kopiert den Wert vom rd in den Speicher
 ```
 
 Es gibt auch LHU und LBU (analog SHU, SBU). Der Unterschied ist, dass der kopierte 16/8 bit Wert wird zero-extended zu 32 bits, wogegen bei normalen LH und LB wird das sign-extended.
