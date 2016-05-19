@@ -92,7 +92,7 @@ Falls die Bedingung erfüllt wird, wird der offset zu dem Befehlszähler addiert
 
 **Load/Store Instruktionen**
 
-```
+```asm
 LW/LH/LB rd, rs1, offset ; kopiert 32/16/8 bits vom Speicher von der Adresse (rs1+offset)
 SW/SH/SB rd, rs1, offset ; kopiert den Wert vom rd in den Speicher
 ```
