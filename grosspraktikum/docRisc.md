@@ -85,7 +85,7 @@ Ein wichtiger Aspekt der Risc-V ISA ist, dass es keine flags gibt, stattdessen w
 
 ```asm
 BEQ/BNE src1, src2, offset ; branch equal/not equal
-BLT[U]/BGE[U]  src1, src2, offset  ; branch less/greate than
+BLT[U]/BGE[U]  src1, src2, offset  ; branch less/greater than
 ```
 
 Falls die Bedingung erfüllt wird, wird der offset zu dem Befehlszähler addiert.
