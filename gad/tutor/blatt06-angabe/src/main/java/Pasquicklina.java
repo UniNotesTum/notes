@@ -1,3 +1,5 @@
+import com.sun.org.apache.regexp.internal.RE;
+
 import java.util.Arrays;
 
 public class Pasquicklina {
@@ -72,6 +74,8 @@ public class Pasquicklina {
 
     private static class Partitioner extends Thread {
 
+        private static final int PARTITION = 1, RECURSIVE = 0;
+
         int l = 0, r = 0, leftThread = 0, rightThread = 0;
 
         Barrier barrier;
@@ -79,6 +83,8 @@ public class Pasquicklina {
         Partitioner[] threads;
 
         int[] a;
+
+        int state = 0, hop = 0, number = RECURSIVE;
 
         Partitioner(int[] a, Partitioner[] threads) {
             this.a = a;
@@ -91,20 +97,100 @@ public class Pasquicklina {
             this.leftThread = leftThread;
             this.rightThread = rightThread;
             this.barrier = barrier;
-
+            this.state = RECURSIVE;
             this.start();
+        }
+
+        private void initPartition(int l, int r, int hop, int number) {
+            this.l = l;
+            this.r = r;
+            this.hop = hop;
+            this.number = number;
+            this.state = PARTITION;
+            this.start();
+        }
+
+
+        private void partitionHop(int[] a, int l, int r, int hop, int number) {
+
+            int i = l + number, j = i;
+
+            while (j + hop < r) j += hop;
+
+            int pivot = r;
+
+            do {
+
+                while (i < r && a[i] < a[pivot]) {
+                    i += hop;
+                }
+
+                while (j >= l && a[j] > a[pivot]) {
+                    j -= hop;
+                }
+
+                if (i < j) {
+                    swap(a, i, j);
+                    i += hop;
+                    j -= hop;
+                }
+
+            } while (i < j);
+
         }
 
         public void run() {
 
+            if (state == PARTITION) {
+
+                partitionHop(a, l, r, hop, number);
+
+                return;
+
+            }
+
             if (l < r) {
 
-                int i = partition(a, l, r);
+                int countThreads = rightThread - leftThread;
 
-                if (rightThread - leftThread > 1) {
+
+                for (int q = 1; q < countThreads; q++) {
+
+                    if (l + q > r) break;
+
+                    if (threads[leftThread + q].getState() == State.TERMINATED) {
+                        threads[leftThread + q] = new Partitioner(a, threads);
+                    }
+
+                    threads[leftThread + q].initPartition(l, r, countThreads, q);
+
+                }
+
+                partitionHop(a, l, r, countThreads, 0);
+
+                for (int i =  leftThread + 1; i < rightThread; i++) {
+                    try {
+                        threads[i].join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                int left = l, right = r;
+
+                while (a[left] < a[r]) left++;
+                while (right > l && a[right] > a[r]) right--;
+
+                int i = partition(a, left, right);
+
+                if (countThreads > 1) {
                     int mid = leftThread + (rightThread - leftThread) / 2;
 
                     Barrier bar = new Barrier(2);
+
+                    if (threads[mid].getState() == State.TERMINATED) {
+                        threads[mid] = new Partitioner(a, threads);
+                    }
 
                     threads[mid].init(i + 1, r, mid, rightThread, bar);
                     r = i - 1;
