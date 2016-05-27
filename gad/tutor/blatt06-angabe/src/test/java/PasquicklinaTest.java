@@ -17,11 +17,11 @@ public class PasquicklinaTest {
 
 //      numbers = new int[] {58, 81, 37, 95, 49, 44, 22, 83, 81, 37, 57, 62, 56, 82, 60, 31, 13, 87, 40, 75};
 //      numbers = new int[] {18, 84, 69, 69};
-      System.out.println(Arrays.toString(numbers));
+//      System.out.println(Arrays.toString(numbers));
 
       sort.accept(numbers);
 
-      System.out.println(Arrays.toString(numbers));
+//      System.out.println(Arrays.toString(numbers));
       for (int i = 1; i < numbers.length; i++)
         assertTrue(numbers[i - 1] <= numbers[i]);
     }  
