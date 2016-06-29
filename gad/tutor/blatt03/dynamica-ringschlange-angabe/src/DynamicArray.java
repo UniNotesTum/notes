@@ -162,14 +162,4 @@ public class DynamicArray {
       elements[index] = value;
   }
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder("[ ");
-		for (int e : elements) {
-			builder.append(e + ", ");
-		}
-		builder.append("]");
-		return builder.toString();
-	}
-
 }

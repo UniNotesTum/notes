@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="testdata">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/mauba-angabe/testdata.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

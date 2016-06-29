@@ -48,22 +48,4 @@ public class DynamicStack {
       return element;
   }
 
-	public static void main(String[] args) {
-		DynamicStack stack = new DynamicStack(2, 4);
-		for (int i = 0; i < 10; i++)
-			stack.pushBack(i);
-		System.out.println(stack.dynArr);
-        System.out.println(stack.popBack());
-        System.out.println(stack.popBack());
-        System.out.println(stack.popBack());
-        System.out.println(stack.popBack());
-        System.out.println(stack.dynArr);
-        System.out.println(stack.popBack());
-        System.out.println(stack.popBack());
-        System.out.println(stack.popBack());
-        System.out.println(stack.dynArr);
-        stack.pushBack(10);
-        stack.pushBack(20);
-        System.out.println(stack.dynArr);
-	}
 }
